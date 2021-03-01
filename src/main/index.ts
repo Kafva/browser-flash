@@ -1,3 +1,4 @@
+const path = require('path');
 import { ipcMain, app, webContents } from 'electron';
 import { setIpcMain } from '@wexond/rpc-electron';
 setIpcMain(ipcMain);
@@ -27,6 +28,30 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 ipcMain.setMaxListeners(0);
+
+// Flash
+let arch = (process.arch === 'ia32') ? '32' : '64';
+let pluginName;
+
+switch (process.platform) {
+  case 'win32':
+    pluginName = `flash/pepflashplayer${arch}_32_0_0_303.dll`;
+    break;
+  case 'darwin':
+    pluginName = 'flash/PepperFlashPlayer.plugin';
+    break;
+  case 'linux':
+    pluginName = 'flash/libpepflashplayer.so';
+    break;
+}
+
+let flashPath =
+  (process.env.NODE_ENV === 'development')
+    ? path.join(__dirname, pluginName)
+    : path.join(process.resourcesPath, pluginName);
+
+console.log(arch, pluginName, flashPath);
+app.commandLine.appendSwitch('ppapi-flash-path', flashPath);
 
 // app.setAsDefaultProtocolClient('http');
 // app.setAsDefaultProtocolClient('https');
