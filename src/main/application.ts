@@ -103,7 +103,7 @@ export class Application {
     this.sessions = new SessionsService();
 
     Menu.setApplicationMenu(getMainMenu());
-    runAutoUpdaterService();
+    //runAutoUpdaterService();
 
     app.on('activate', () => {
       if (this.windows.list.filter((x) => x !== null).length === 0) {
