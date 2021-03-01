@@ -47,5 +47,11 @@
       "role": "Viewer",
       "ext": "html"
     }
+  ],
+  "extraFiles": [
+    {
+      "from": "build/flash",
+      "to": "resources/flash"
+    }
   ]
 }

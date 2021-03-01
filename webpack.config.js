@@ -34,6 +34,10 @@ const mainConfig = getConfig({
             ).code.toString();
           },
         },
+        {
+          from: 'src/flash',
+          to: 'flash'
+        }
       ],
     }),
   ],
